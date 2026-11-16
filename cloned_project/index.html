@@ -1,0 +1,10 @@
+<!doctype html><html><head><meta charset='utf-8'><title>Expense Tracker</title></head><body>
+<h2>Expense Tracker (Client-only)</h2>
+<form id='f'><input id='t' placeholder='title'> <input id='a' placeholder='amount' type='number'> <button>Add</button></form>
+<ul id='list'></ul>
+<script>
+const form=document.getElementById('f'); const list=document.getElementById('list');
+function render(){ list.innerHTML=''; JSON.parse(localStorage.getItem('exps')||'[]').forEach((e,i)=>{let li=document.createElement('li'); li.textContent=`${e.title} - ₹${e.amount}`; list.appendChild(li);});}
+form.addEventListener('submit',e=>{e.preventDefault(); let exs=JSON.parse(localStorage.getItem('exps')||'[]'); exs.push({title:document.getElementById('t').value, amount:document.getElementById('a').value}); localStorage.setItem('exps',JSON.stringify(exs)); render();});
+render();
+</script></body></html>
